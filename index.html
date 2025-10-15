@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KhoaPham Business Consulting | Tư vấn kinh doanh doanh nghiệp</title>
+    <title>KhoaPham Legal - Tư vấn pháp luật doanh nghiệp chuyên nghiệp</title>
     <style>
         * {
             margin: 0;
@@ -11,25 +11,35 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #1a2332;
+            --secondary-color: #c9a961;
+            --accent-color: #2c5f7d;
+            --text-dark: #1a2332;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
         /* Header */
-        header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 1rem 0;
+        .header {
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
 
-        nav {
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -39,445 +49,756 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
             text-decoration: none;
+            letter-spacing: 1px;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
+        .nav-cta {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
             text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary-color);
         }
 
-        .nav-links a:hover {
-            color: #ffd700;
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--secondary-color);
+            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 150px 2rem 100px;
-            text-align: center;
+            background: linear-gradient(135deg, rgba(26, 35, 50, 0.95) 0%, rgba(44, 95, 125, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%231a2332" width="1200" height="600"/><path fill="%232c5f7d" opacity="0.3" d="M0 300L50 283.3C100 266.7 200 233.3 300 216.7C400 200 500 200 600 216.7C700 233.3 800 266.7 900 283.3C1000 300 1100 300 1150 300L1200 300L1200 600L1150 600C1100 600 1000 600 900 600C800 600 700 600 600 600C500 600 400 600 300 600C200 600 100 600 50 600L0 600Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 2rem 4rem;
+            position: relative;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 1s;
-        }
-
-        .cta-button {
-            background: #ffd700;
-            color: #333;
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Stats Section */
-        .stats {
-            background: #f8f9fa;
-            padding: 4rem 2rem;
-        }
-
-        .stats-container {
+        .hero-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            text-align: center;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero-text h1 .highlight {
+            color: var(--secondary-color);
+            display: block;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .stat-item {
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
+            text-align: center;
         }
 
         .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
         }
 
         .stat-label {
-            font-size: 1.1rem;
-            color: #666;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 2rem;
+        /* Form Card */
+        .form-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .form-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .form-card p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--secondary-color);
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #b8954d;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 169, 97, 0.3);
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .trust-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .about h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1e3c72;
+        .trust-badges h3 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 400;
         }
 
-        .about-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            text-align: justify;
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .badge-item {
+            padding: 1.5rem;
+        }
+
+        .badge-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge-text {
+            color: var(--text-dark);
+            font-weight: 600;
         }
 
         /* Services Section */
         .services {
-            background: #f8f9fa;
-            padding: 5rem 2rem;
+            padding: 6rem 2rem;
+            background: var(--bg-light);
         }
 
-        .services h2 {
-            font-size: 2.5rem;
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-            color: #1e3c72;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
         }
 
         .services-grid {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .service-card {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 1px solid #e5e7eb;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--secondary-color);
         }
 
         .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .service-card h3 {
-            color: #1e3c72;
+            font-size: 1.5rem;
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
-        /* Clients Section */
-        .clients {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .clients h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1e3c72;
-        }
-
-        .clients-info {
-            text-align: center;
-            font-size: 1.2rem;
+        .service-card p {
+            color: var(--text-light);
             line-height: 1.8;
         }
 
-        /* Footer */
-        footer {
-            background: #1e3c72;
-            color: white;
-            padding: 3rem 2rem 1rem;
+        /* Why Choose Us */
+        .why-choose {
+            padding: 6rem 2rem;
+            background: white;
         }
 
-        .footer-content {
+        .why-container {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .why-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
         }
 
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #ffd700;
+        .why-item {
+            display: flex;
+            gap: 1.5rem;
         }
 
-        .footer-section p, .footer-section a {
-            color: #ddd;
-            text-decoration: none;
-            display: block;
+        .why-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .why-content h4 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
+        .why-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: #b8954d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(201, 169, 97, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        .footer-section h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
         .footer-section a:hover {
-            color: #ffd700;
+            color: var(--secondary-color);
         }
 
         .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding-top: 2rem;
+            text-align: center;
+            opacity: 0.8;
         }
 
         /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card {
+                padding: 2rem;
+            }
+
+            .cta-content h2 {
                 font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <nav>
-            <a href="#" class="logo" id="company-name">KhoaPham Consulting</a>
-            <ul class="nav-links">
-                <li><a href="#home">Trang chủ</a></li>
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="#services">Dịch vụ</a></li>
-                <li><a href="#clients">Khách hàng</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo" id="company-name">KHOAPHAM LEGAL</a>
+            <a href="#contact" class="nav-cta">Tư vấn miễn phí</a>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1 id="hero-title">Tư vấn kinh doanh doanh nghiệp chuyên nghiệp</h1>
-        <p id="hero-subtitle">Đồng hành cùng doanh nghiệp phát triển bền vững với giải pháp tư vấn tối ưu</p>
-        <a href="#contact" class="cta-button">Liên hệ ngay</a>
-    </section>
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Giải pháp pháp lý <span class="highlight">toàn diện</span> cho doanh nghiệp
+                </h1>
+                <p>Bảo vệ quyền lợi và gia tăng giá trị doanh nghiệp của bạn với đội ngũ luật sư giàu kinh nghiệm</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-years">15+</span>
+                        <span class="stat-label">Năm kinh nghiệm</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-cases">2,500+</span>
+                        <span class="stat-label">Vụ việc thành công</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="stat-rate">98%</span>
+                        <span class="stat-label">Tỷ lệ thắng kiện</span>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-container" id="stats-container">
-            <!-- Stats will be inserted here by JavaScript -->
+            <div class="form-card">
+                <h3>Đăng ký tư vấn miễn phí</h3>
+                <p>Nhận tư vấn từ chuyên gia trong vòng 24 giờ</p>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label>Họ và tên *</label>
+                        <input type="text" required placeholder="Nguyễn Văn A">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Số điện thoại *</label>
+                        <input type="tel" required placeholder="0912 345 678">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="email@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dịch vụ quan tâm *</label>
+                        <select required>
+                            <option value="">Chọn dịch vụ</option>
+                            <option>Tư vấn thành lập doanh nghiệp</option>
+                            <option>Tư vấn hợp đồng</option>
+                            <option>Tranh tụng dân sự</option>
+                            <option>Tư vấn M&A</option>
+                            <option>Sở hữu trí tuệ</option>
+                            <option>Khác</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nội dung tư vấn</label>
+                        <textarea placeholder="Mô tả ngắn gọn vấn đề của bạn..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Gửi yêu cầu tư vấn</button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2>Về chúng tôi</h2>
-        <div class="about-content" id="about-content">
-            <!-- Content will be inserted here by JavaScript -->
+    <!-- Trust Badges -->
+    <section class="trust-badges">
+        <div class="trust-container">
+            <h3>Được tin tưởng bởi hơn 1,000 doanh nghiệp tại Việt Nam</h3>
+            <div class="badges-grid">
+                <div class="badge-item">
+                    <div class="badge-icon">🏆</div>
+                    <div class="badge-text">Top 10 Công ty Luật uy tín</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">⚖️</div>
+                    <div class="badge-text">Thành viên Hiệp hội Luật sư VN</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">🌟</div>
+                    <div class="badge-text">4.9/5 sao đánh giá</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">ISO 9001:2015</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services -->
     <section class="services" id="services">
-        <h2>Dịch vụ của chúng tôi</h2>
-        <div class="services-grid" id="services-grid">
-            <!-- Services will be inserted here by JavaScript -->
+        <div class="services-container">
+            <div class="section-title">
+                <h2>Dịch vụ pháp lý chuyên nghiệp</h2>
+                <p>Giải pháp toàn diện cho mọi vấn đề pháp lý của doanh nghiệp</p>
+            </div>
+            
+            <div class="services-grid" id="services-grid">
+                <!-- Services will be inserted here -->
+            </div>
         </div>
     </section>
 
-    <!-- Clients Section -->
-    <section class="clients" id="clients">
-        <h2>Khách hàng của chúng tôi</h2>
-        <div class="clients-info" id="clients-info">
-            <!-- Content will be inserted here by JavaScript -->
+    <!-- Why Choose Us -->
+    <section class="why-choose">
+        <div class="why-container">
+            <div class="section-title">
+                <h2>Tại sao chọn chúng tôi?</h2>
+                <p>Cam kết mang đến dịch vụ pháp lý chất lượng cao nhất</p>
+            </div>
+            
+            <div class="why-grid" id="why-grid">
+                <!-- Why items will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Sẵn sàng bảo vệ quyền lợi của bạn?</h2>
+            <p>Liên hệ ngay để được tư vấn miễn phí từ đội ngũ luật sư chuyên nghiệp</p>
+            <div class="cta-buttons">
+                <a href="#hero" class="btn-primary">Đăng ký tư vấn</a>
+                <a href="tel:0901234567" class="btn-secondary">📞 Gọi ngay: 090 123 4567</a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 id="footer-company-name">KhoaPham Consulting</h3>
-                <p id="footer-description">Đối tác tin cậy trong tư vấn kinh doanh</p>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3 id="footer-company">KHOAPHAM LEGAL</h3>
+                <p id="footer-description">Công ty luật hàng đầu với đội ngũ luật sư giàu kinh nghiệm, cam kết mang đến giải pháp pháp lý tối ưu cho doanh nghiệp.</p>
             </div>
+            
             <div class="footer-section">
-                <h3>Liên hệ</h3>
-                <p id="footer-address">Địa chỉ: Đang cập nhật</p>
-                <p id="footer-phone">Điện thoại: Đang cập nhật</p>
-                <p id="footer-email">Email: Đang cập nhật</p>
+                <h4>Dịch vụ</h4>
+                <ul id="footer-services">
+                    <!-- Services will be inserted here -->
+                </ul>
             </div>
+            
             <div class="footer-section">
-                <h3>Dịch vụ</h3>
-                <div id="footer-services">
-                    <!-- Services will be inserted here by JavaScript -->
-                </div>
+                <h4>Liên hệ</h4>
+                <ul>
+                    <li id="footer-address">📍 Đang cập nhật</li>
+                    <li id="footer-phone">📞 Đang cập nhật</li>
+                    <li id="footer-email">✉️ Đang cập nhật</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Theo dõi</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p id="footer-copyright">© 2025 VIVA Business Consulting. All rights reserved.</p>
+            <p id="footer-copyright">© 2025 KhoaPham Legal Consulting. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         // ============================================
-        // CẤU HÌNH NỘI DUNG WEBSITE - CẬP NHẬT TẠI ĐÂY
+        // CẤU HÌNH NỘI DUNG - CẬP NHẬT TẠI ĐÂY
         // ============================================
         
         const CONFIG = {
-            // Thông tin công ty
-            companyName: "KhoaPham Consulting",
+            companyName: "KHOAPHAM LEGAL",
             
-            // Hero Section
-            heroTitle: "Tư vấn kinh doanh doanh nghiệp chuyên nghiệp",
-            heroSubtitle: "Đồng hành cùng doanh nghiệp phát triển bền vững với giải pháp tư vấn tối ưu",
+            // Hero stats
+            stats: {
+                years: "15+",
+                cases: "2,500+",
+                rate: "98%"
+            },
             
-            // Thống kê
-            stats: [
-                { number: "1000+", label: "Khách hàng tin tưởng" },
-                { number: "10,000+", label: "Sự vụ thành công/năm" },
-                { number: "15+", label: "Năm kinh nghiệm" },
-                { number: "ISO", label: "Tiêu chuẩn quốc tế" }
-            ],
-            
-            // Giới thiệu
-            aboutContent: `
-                <p>Chúng tôi đã được lựa chọn, tín nhiệm và đồng hành cùng hằng ngàn khách hàng là những công ty danh tiếng đến từ Nhật Bản, Hoa Kỳ, Châu Âu, Singapore, Ấn Độ, Trung Quốc, Hàn Quốc… trong các lĩnh vực: Dệt may, năng lượng, dược phẩm, quảng cáo, nông nghiệp…</p>
-                <p>Hiện KhoaPham tích hợp được nguồn lực và hệ thống vận hành tự động theo tiêu chuẩn ISO với năng lực thực thi thành công đột phá hằng vạn sự vụ mỗi năm, giúp gia tăng hiệu quả kinh doanh cho khách hàng.</p>
-            `,
-            
-            // Dịch vụ
+            // Services
             services: [
                 {
+                    icon: "🏢",
+                    title: "Thành lập doanh nghiệp",
+                    description: "Hỗ trợ toàn diện thủ tục thành lập công ty, đăng ký kinh doanh, giấy phép ngành nghề"
+                },
+                {
+                    icon: "📝",
+                    title: "Tư vấn hợp đồng",
+                    description: "Soạn thảo, rà soát và đàm phán các loại hợp đồng thương mại, lao động, đầu tư"
+                },
+                {
+                    icon: "⚖️",
+                    title: "Tranh tụng & Kiện tụng",
+                    description: "Đại diện pháp lý trong các vụ tranh chấp dân sự, thương mại, lao động"
+                },
+                {
+                    icon: "🤝",
+                    title: "Tư vấn M&A",
+                    description: "Tư vấn mua bán, sáp nhập doanh nghiệp, thẩm định pháp lý, cấu trúc giao dịch"
+                },
+                {
+                    icon: "💡",
+                    title: "Sở hữu trí tuệ",
+                    description: "Đăng ký bảo hộ thương hiệu, bằng sáng chế, bản quyền, giải quyết tranh chấp IP"
+                },
+                {
                     icon: "📊",
-                    title: "Tư vấn chiến lược",
-                    description: "Xây dựng chiến lược kinh doanh phù hợp với từng giai đoạn phát triển của doanh nghiệp"
-                },
-                {
-                    icon: "💼",
-                    title: "Tư vấn pháp lý",
-                    description: "Hỗ trợ đầy đủ các vấn đề pháp lý, thành lập doanh nghiệp, giấy phép kinh doanh"
-                },
-                {
-                    icon: "📈",
-                    title: "Tư vấn tài chính",
-                    description: "Tối ưu hóa cấu trúc tài chính, kế hoạch đầu tư và phát triển bền vững"
-                },
-                {
-                    icon: "🌐",
-                    title: "Tư vấn nhân sự",
-                    description: "Xây dựng hệ thống quản trị nhân sự hiện đại, đào tạo và phát triển đội ngũ"
-                },
-                {
-                    icon: "🎯",
-                    title: "Tư vấn marketing",
-                    description: "Chiến lược marketing hiệu quả, xây dựng thương hiệu và phát triển thị trường"
+                    title: "Tuân thủ pháp luật",
+                    description: "Tư vấn tuân thủ pháp luật doanh nghiệp, thuế, lao động, bảo vệ dữ liệu"
                 }
             ],
             
-            // Khách hàng
-            clientsInfo: `
-                <p>Chúng tôi tự hào đồng hành cùng các doanh nghiệp hàng đầu từ nhiều quốc gia:</p>
-                <p><strong>Nhật Bản • Hoa Kỳ • Châu Âu • Singapore • Ấn Độ • Trung Quốc • Hàn Quốc</strong></p>
-                <p>Trong các lĩnh vực: Dệt may, Năng lượng, Dược phẩm, Quảng cáo, Nông nghiệp và nhiều ngành nghề khác</p>
-            `,
+            // Why choose us
+            whyChoose: [
+                {
+                    icon: "🎓",
+                    title: "Chuyên môn cao",
+                    description: "Đội ngũ luật sư có bằng cấp quốc tế, kinh nghiệm xử lý hàng nghìn vụ việc phức tạp"
+                },
+                {
+                    icon: "⚡",
+                    title: "Phản hồi nhanh chóng",
+                    description: "Cam kết phản hồi trong vòng 24 giờ, hỗ trợ khẩn cấp 24/7"
+                },
+                {
+                    icon: "💰",
+                    title: "Chi phí minh bạch",
+                    description: "Báo giá rõ ràng, không phát sinh chi phí ẩn, đa dạng gói dịch vụ"
+                },
+                {
+                    icon: "🎯",
+                    title: "Giải pháp tối ưu",
+                    description: "Phân tích sâu, đưa ra giải pháp hiệu quả nhất cho từng tình huống cụ thể"
+                }
+            ],
             
             // Footer
-            footerDescription: "Đối tác tin cậy trong tư vấn kinh doanh",
-            footerAddress: "Địa chỉ: Đang cập nhật",
-            footerPhone: "Điện thoại: Đang cập nhật",
-            footerEmail: "Email: Đang cập nhật",
-            footerCopyright: "© 2025 KhoaPham Business Consulting. All rights reserved."
+            footerDescription: "Công ty luật hàng đầu với đội ngũ luật sư giàu kinh nghiệm, cam kết mang đến giải pháp pháp lý tối ưu cho doanh nghiệp.",
+            footerAddress: "📍 Đang cập nhật",
+            footerPhone: "📞 Đang cập nhật",
+            footerEmail: "✉️ Đang cập nhật",
+            footerCopyright: "© 2025 KhoaPham Legal Consulting. All rights reserved."
         };
         
         // ============================================
-        // KHỞI TẠO WEBSITE - KHÔNG CẦN SỬA PHẦN NÀY
+        // KHỞI TẠO WEBSITE
         // ============================================
         
         function initWebsite() {
-            // Update company name
+            // Company name
             document.getElementById('company-name').textContent = CONFIG.companyName;
-            document.getElementById('footer-company-name').textContent = CONFIG.companyName;
+            document.getElementById('footer-company').textContent = CONFIG.companyName;
             
-            // Update hero section
-            document.getElementById('hero-title').textContent = CONFIG.heroTitle;
-            document.getElementById('hero-subtitle').textContent = CONFIG.heroSubtitle;
+            // Stats
+            document.getElementById('stat-years').textContent = CONFIG.stats.years;
+            document.getElementById('stat-cases').textContent = CONFIG.stats.cases;
+            document.getElementById('stat-rate').textContent = CONFIG.stats.rate;
             
-            // Update stats
-            const statsContainer = document.getElementById('stats-container');
-            statsContainer.innerHTML = CONFIG.stats.map(stat => `
-                <div class="stat-item">
-                    <div class="stat-number">${stat.number}</div>
-                    <div class="stat-label">${stat.label}</div>
-                </div>
-            `).join('');
-            
-            // Update about
-            document.getElementById('about-content').innerHTML = CONFIG.aboutContent;
-            
-            // Update services
+            // Services
             const servicesGrid = document.getElementById('services-grid');
             servicesGrid.innerHTML = CONFIG.services.map(service => `
                 <div class="service-card">
@@ -487,35 +808,50 @@
                 </div>
             `).join('');
             
-            // Update clients
-            document.getElementById('clients-info').innerHTML = CONFIG.clientsInfo;
+            // Why choose us
+            const whyGrid = document.getElementById('why-grid');
+            whyGrid.innerHTML = CONFIG.whyChoose.map(item => `
+                <div class="why-item">
+                    <div class="why-icon">${item.icon}</div>
+                    <div class="why-content">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
             
-            // Update footer
+            // Footer
             document.getElementById('footer-description').textContent = CONFIG.footerDescription;
             document.getElementById('footer-address').textContent = CONFIG.footerAddress;
             document.getElementById('footer-phone').textContent = CONFIG.footerPhone;
             document.getElementById('footer-email').textContent = CONFIG.footerEmail;
             document.getElementById('footer-copyright').textContent = CONFIG.footerCopyright;
             
-            // Update footer services
             const footerServices = document.getElementById('footer-services');
             footerServices.innerHTML = CONFIG.services.slice(0, 4).map(service => 
-                `<a href="#services">${service.title}</a>`
+                `<li><a href="#services">${service.title}</a></li>`
             ).join('');
         }
         
-        // Smooth scrolling
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ trong vòng 24 giờ.');
+            this.reset();
+        });
+        
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
         
-        // Initialize website when page loads
+        // Initialize
         document.addEventListener('DOMContentLoaded', initWebsite);
     </script>
 </body>
