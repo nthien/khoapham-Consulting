@@ -192,6 +192,15 @@
             min-height: 100px;
         }
 
+        /* Honeypot - Anti-spam */
+        .honeypot {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
         .submit-btn {
             width: 100%;
             background: var(--secondary-color);
@@ -683,6 +692,9 @@
                         <textarea name="message" placeholder="Mô tả ngắn gọn vấn đề của bạn..."></textarea>
                     </div>
                     
+                    <!-- Honeypot field - KHONG XOA, de chong spam bot -->
+                    <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+                    
                     <button type="submit" class="submit-btn">Gửi yêu cầu tư vấn</button>
                 </form>
             </div>
@@ -749,7 +761,7 @@
             <p>Liên hệ ngay để được tư vấn miễn phí từ đội ngũ luật sư chuyên nghiệp</p>
             <div class="cta-buttons">
                 <a href="#hero" class="btn-primary">Đăng ký tư vấn</a>
-                <a href="https://chat.zalo.me/?phone=0932670908" target="_blank" rel="noopener noreferrer" class="btn-secondary">💬 Chat Zalo ngay</a>
+                <a href="https://chat.zalo.me/?phone=0901234567" target="_blank" rel="noopener noreferrer" class="btn-secondary">💬 Chat Zalo ngay</a>
             </div>
         </div>
     </section>
@@ -773,7 +785,7 @@
                 <h4>Liên hệ</h4>
                 <ul>
                     <li id="footer-address">📍 Đang cập nhật</li>
-                    <li><a href="https://chat.zalo.me/?phone=0932670908" target="_blank" rel="noopener noreferrer">📞 0932670908</a></li>
+                    <li><a href="https://chat.zalo.me/?phone=0901234567" target="_blank" rel="noopener noreferrer">📞 0901234567</a></li>
                     <li id="footer-email">✉️ info@khoaphamlegal.com</li>
                 </ul>
             </div>
@@ -970,9 +982,17 @@
         Gia: Mien phi 200 emails/thang
         */
         
-        // Form submission handler with AJAX
+        // Form submission handler with AJAX and spam protection
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault(); // Prevent default form submission
+            
+            // Honeypot spam check
+            const honeypot = this.querySelector('input[name="website"]');
+            if (honeypot && honeypot.value !== '') {
+                // Bot detected! Silently ignore
+                console.log('Spam detected');
+                return false;
+            }
             
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
@@ -984,6 +1004,9 @@
             try {
                 // Get form data
                 const formData = new FormData(this);
+                
+                // Remove honeypot field before sending
+                formData.delete('website');
                 
                 // Submit to Formspree using AJAX
                 const response = await fetch(this.action, {
@@ -1021,12 +1044,6 @@
                 closeModal();
             }
         });
-        
-        // Handle Zalo button click
-        function confirmZalo() {
-            // Allow the link to open normally
-            return true;
-        }
         
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
