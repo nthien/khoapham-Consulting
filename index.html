@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KhoaPham Business Consulting | Tư vấn kinh doanh doanh nghiệp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 2rem 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s;
+        }
+
+        .cta-button {
+            background: #ffd700;
+            color: #333;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Services Section */
+        .services {
+            background: #f8f9fa;
+            padding: 5rem 2rem;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        /* Clients Section */
+        .clients {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .clients h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .clients-info {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo" id="company-name">KhoaPham Consulting</a>
+            <ul class="nav-links">
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="#clients">Khách hàng</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1 id="hero-title">Tư vấn kinh doanh doanh nghiệp chuyên nghiệp</h1>
+        <p id="hero-subtitle">Đồng hành cùng doanh nghiệp phát triển bền vững với giải pháp tư vấn tối ưu</p>
+        <a href="#contact" class="cta-button">Liên hệ ngay</a>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container" id="stats-container">
+            <!-- Stats will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>Về chúng tôi</h2>
+        <div class="about-content" id="about-content">
+            <!-- Content will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2>Dịch vụ của chúng tôi</h2>
+        <div class="services-grid" id="services-grid">
+            <!-- Services will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients" id="clients">
+        <h2>Khách hàng của chúng tôi</h2>
+        <div class="clients-info" id="clients-info">
+            <!-- Content will be inserted here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 id="footer-company-name">KhoaPham Consulting</h3>
+                <p id="footer-description">Đối tác tin cậy trong tư vấn kinh doanh</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liên hệ</h3>
+                <p id="footer-address">Địa chỉ: Đang cập nhật</p>
+                <p id="footer-phone">Điện thoại: Đang cập nhật</p>
+                <p id="footer-email">Email: Đang cập nhật</p>
+            </div>
+            <div class="footer-section">
+                <h3>Dịch vụ</h3>
+                <div id="footer-services">
+                    <!-- Services will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p id="footer-copyright">© 2025 VIVA Business Consulting. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // CẤU HÌNH NỘI DUNG WEBSITE - CẬP NHẬT TẠI ĐÂY
+        // ============================================
+        
+        const CONFIG = {
+            // Thông tin công ty
+            companyName: "KhoaPham Consulting",
+            
+            // Hero Section
+            heroTitle: "Tư vấn kinh doanh doanh nghiệp chuyên nghiệp",
+            heroSubtitle: "Đồng hành cùng doanh nghiệp phát triển bền vững với giải pháp tư vấn tối ưu",
+            
+            // Thống kê
+            stats: [
+                { number: "1000+", label: "Khách hàng tin tưởng" },
+                { number: "10,000+", label: "Sự vụ thành công/năm" },
+                { number: "15+", label: "Năm kinh nghiệm" },
+                { number: "ISO", label: "Tiêu chuẩn quốc tế" }
+            ],
+            
+            // Giới thiệu
+            aboutContent: `
+                <p>Chúng tôi đã được lựa chọn, tín nhiệm và đồng hành cùng hằng ngàn khách hàng là những công ty danh tiếng đến từ Nhật Bản, Hoa Kỳ, Châu Âu, Singapore, Ấn Độ, Trung Quốc, Hàn Quốc… trong các lĩnh vực: Dệt may, năng lượng, dược phẩm, quảng cáo, nông nghiệp…</p>
+                <p>Hiện KhoaPham tích hợp được nguồn lực và hệ thống vận hành tự động theo tiêu chuẩn ISO với năng lực thực thi thành công đột phá hằng vạn sự vụ mỗi năm, giúp gia tăng hiệu quả kinh doanh cho khách hàng.</p>
+            `,
+            
+            // Dịch vụ
+            services: [
+                {
+                    icon: "📊",
+                    title: "Tư vấn chiến lược",
+                    description: "Xây dựng chiến lược kinh doanh phù hợp với từng giai đoạn phát triển của doanh nghiệp"
+                },
+                {
+                    icon: "💼",
+                    title: "Tư vấn pháp lý",
+                    description: "Hỗ trợ đầy đủ các vấn đề pháp lý, thành lập doanh nghiệp, giấy phép kinh doanh"
+                },
+                {
+                    icon: "📈",
+                    title: "Tư vấn tài chính",
+                    description: "Tối ưu hóa cấu trúc tài chính, kế hoạch đầu tư và phát triển bền vững"
+                },
+                {
+                    icon: "🌐",
+                    title: "Tư vấn nhân sự",
+                    description: "Xây dựng hệ thống quản trị nhân sự hiện đại, đào tạo và phát triển đội ngũ"
+                },
+                {
+                    icon: "🎯",
+                    title: "Tư vấn marketing",
+                    description: "Chiến lược marketing hiệu quả, xây dựng thương hiệu và phát triển thị trường"
+                },
+                {
+                    icon: "⚙️",
+                    title: "Tối ưu vận hành",
+                    description: "Cải tiến quy trình, nâng cao hiệu suất và năng suất kinh doanh"
+                }
+            ],
+            
+            // Khách hàng
+            clientsInfo: `
+                <p>Chúng tôi tự hào đồng hành cùng các doanh nghiệp hàng đầu từ nhiều quốc gia:</p>
+                <p><strong>Nhật Bản • Hoa Kỳ • Châu Âu • Singapore • Ấn Độ • Trung Quốc • Hàn Quốc</strong></p>
+                <p>Trong các lĩnh vực: Dệt may, Năng lượng, Dược phẩm, Quảng cáo, Nông nghiệp và nhiều ngành nghề khác</p>
+            `,
+            
+            // Footer
+            footerDescription: "Đối tác tin cậy trong tư vấn kinh doanh",
+            footerAddress: "Địa chỉ: Đang cập nhật",
+            footerPhone: "Điện thoại: Đang cập nhật",
+            footerEmail: "Email: Đang cập nhật",
+            footerCopyright: "© 2025 KhoaPham Business Consulting. All rights reserved."
+        };
+        
+        // ============================================
+        // KHỞI TẠO WEBSITE - KHÔNG CẦN SỬA PHẦN NÀY
+        // ============================================
+        
+        function initWebsite() {
+            // Update company name
+            document.getElementById('company-name').textContent = CONFIG.companyName;
+            document.getElementById('footer-company-name').textContent = CONFIG.companyName;
+            
+            // Update hero section
+            document.getElementById('hero-title').textContent = CONFIG.heroTitle;
+            document.getElementById('hero-subtitle').textContent = CONFIG.heroSubtitle;
+            
+            // Update stats
+            const statsContainer = document.getElementById('stats-container');
+            statsContainer.innerHTML = CONFIG.stats.map(stat => `
+                <div class="stat-item">
+                    <div class="stat-number">${stat.number}</div>
+                    <div class="stat-label">${stat.label}</div>
+                </div>
+            `).join('');
+            
+            // Update about
+            document.getElementById('about-content').innerHTML = CONFIG.aboutContent;
+            
+            // Update services
+            const servicesGrid = document.getElementById('services-grid');
+            servicesGrid.innerHTML = CONFIG.services.map(service => `
+                <div class="service-card">
+                    <div class="service-icon">${service.icon}</div>
+                    <h3>${service.title}</h3>
+                    <p>${service.description}</p>
+                </div>
+            `).join('');
+            
+            // Update clients
+            document.getElementById('clients-info').innerHTML = CONFIG.clientsInfo;
+            
+            // Update footer
+            document.getElementById('footer-description').textContent = CONFIG.footerDescription;
+            document.getElementById('footer-address').textContent = CONFIG.footerAddress;
+            document.getElementById('footer-phone').textContent = CONFIG.footerPhone;
+            document.getElementById('footer-email').textContent = CONFIG.footerEmail;
+            document.getElementById('footer-copyright').textContent = CONFIG.footerCopyright;
+            
+            // Update footer services
+            const footerServices = document.getElementById('footer-services');
+            footerServices.innerHTML = CONFIG.services.slice(0, 4).map(service => 
+                `<a href="#services">${service.title}</a>`
+            ).join('');
+        }
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Initialize website when page loads
+        document.addEventListener('DOMContentLoaded', initWebsite);
+    </script>
+</body>
+</html>
