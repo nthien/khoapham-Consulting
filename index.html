@@ -703,11 +703,6 @@
                     <!-- Honeypot field - KHONG XOA, de chong spam bot -->
                     <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
                     
-                    <!-- TEST BUTTON - XOA TRUOC KHI DEPLOY -->
-                    <button type="button" onclick="testHoneypot()" style="background: #ff6b6b; margin-bottom: 10px; width: 100%; padding: 10px; border: none; border-radius: 5px; color: white; font-weight: 600; cursor: pointer;">
-                        🧪 TEST: Giả làm spam bot
-                    </button>
-                    
                     <button type="submit" class="submit-btn">Gửi yêu cầu tư vấn</button>
                 </form>
             </div>
@@ -1006,9 +1001,7 @@
             const honeypot = this.querySelector('input[name="_gotcha"]');
             if (honeypot && honeypot.value !== '') {
                 // Bot detected! Silently ignore
-                console.log('🛡️ SPAM DETECTED! Honeypot field was filled.');
-                console.log('Form will NOT be submitted. Bot blocked successfully! ✅');
-                alert('🛡️ SPAM BOT DETECTED!\n\nHoneypot field đã bị điền → Form KHÔNG gửi đi.\n\n✅ Spam protection hoạt động tốt!');
+                console.log('Spam detected - form blocked');
                 this.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
@@ -1072,24 +1065,6 @@
                 closeModal();
             }
         });
-        
-        // TEST FUNCTION - Test honeypot spam protection
-        function testHoneypot() {
-            const honeypot = document.querySelector('input[name="_gotcha"]');
-            if (honeypot) {
-                // Fill honeypot like a bot would
-                honeypot.value = "I am a spam bot";
-                alert('✅ Đã điền vào honeypot field!\n\n📝 Bây giờ điền form và nhấn "Gửi yêu cầu tư vấn"\n\n🛡️ Form sẽ KHÔNG gửi đi nếu honeypot hoạt động đúng');
-                
-                // Highlight honeypot temporarily for demo
-                honeypot.style.cssText = 'position: static !important; opacity: 1 !important; border: 3px solid red !important; background: #ffe0e0 !important; width: 100% !important; height: 40px !important;';
-                honeypot.placeholder = '← Bot đã điền vào field này!';
-                
-                setTimeout(() => {
-                    honeypot.style.cssText = 'position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;';
-                }, 5000);
-            }
-        }
         
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
