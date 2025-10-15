@@ -749,7 +749,7 @@
             <p>Liên hệ ngay để được tư vấn miễn phí từ đội ngũ luật sư chuyên nghiệp</p>
             <div class="cta-buttons">
                 <a href="#hero" class="btn-primary">Đăng ký tư vấn</a>
-                <a href="tel:0901234567" class="btn-secondary">📞 Gọi ngay: 090 123 4567</a>
+                <a href="#" id="zalo-button" class="btn-secondary">💬 Chat Zalo ngay</a>
             </div>
         </div>
     </section>
@@ -773,7 +773,7 @@
                 <h4>Liên hệ</h4>
                 <ul>
                     <li id="footer-address">📍 Đang cập nhật</li>
-                    <li id="footer-phone">📞 Đang cập nhật</li>
+                    <li><a href="#" id="footer-phone-link">📞 Đang cập nhật</a></li>
                     <li id="footer-email">✉️ Đang cập nhật</li>
                 </ul>
             </div>
@@ -810,6 +810,9 @@
         
         const CONFIG = {
             companyName: "KHOAPHAM LEGAL",
+            
+            // Contact info
+            zaloPhone: "0901234567", // Thay bang so dien thoai Zalo cua ban (khong can doi sang 84)
             
             // Hero stats
             stats: {
@@ -879,8 +882,8 @@
             // Footer
             footerDescription: "Công ty luật hàng đầu với đội ngũ luật sư giàu kinh nghiệm, cam kết mang đến giải pháp pháp lý tối ưu cho doanh nghiệp.",
             footerAddress: "📍 Đang cập nhật",
-            footerPhone: "📞 Đang cập nhật",
-            footerEmail: "✉️ Đang cập nhật",
+            footerPhone: "📞 0901234567", // Thay bang so dien thoai cua ban
+            footerEmail: "✉️ info@khoaphamlegal.com",
             footerCopyright: "© 2025 KhoaPham Legal Consulting. All rights reserved."
         };
         
@@ -892,6 +895,15 @@
             // Company name
             document.getElementById('company-name').textContent = CONFIG.companyName;
             document.getElementById('footer-company').textContent = CONFIG.companyName;
+            
+            // Setup Zalo button
+            const zaloBtn = document.getElementById('zalo-button');
+            if (zaloBtn) {
+                // Convert phone to Zalo link format
+                // Remove leading 0 and add 84 country code
+                let zaloNumber = CONFIG.zaloPhone.replace(/^0/, '84');
+                zaloBtn.href = `https://zalo.me/${zaloNumber}`;
+            }
             
             // Stats
             document.getElementById('stat-years').textContent = CONFIG.stats.years;
@@ -923,7 +935,14 @@
             // Footer
             document.getElementById('footer-description').textContent = CONFIG.footerDescription;
             document.getElementById('footer-address').textContent = CONFIG.footerAddress;
-            document.getElementById('footer-phone').textContent = CONFIG.footerPhone;
+            
+            const footerPhoneLink = document.getElementById('footer-phone-link');
+            if (footerPhoneLink) {
+                footerPhoneLink.textContent = CONFIG.footerPhone;
+                let zaloNumber = CONFIG.zaloPhone.replace(/^0/, '84');
+                footerPhoneLink.href = `https://zalo.me/${zaloNumber}`;
+            }
+            
             document.getElementById('footer-email').textContent = CONFIG.footerEmail;
             document.getElementById('footer-copyright').textContent = CONFIG.footerCopyright;
             
