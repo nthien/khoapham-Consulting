@@ -658,6 +658,14 @@
                     Xem hướng dẫn phía dưới trong script
                 -->
                 
+                <!-- 
+                    TEMPORARY FIX - De verify form lan dau:
+                    1. Comment dong duoi lai (them dau //)
+                    2. Submit form 1 lan
+                    3. Formspree se tu dong verify
+                    4. Sau do bo comment dong duoi de dung AJAX binh thuong
+                -->
+                
                 <form id="contact-form" action="https://formspree.io/f/mwpravko" method="POST">
                     <div class="form-group">
                         <label>Họ và tên *</label>
@@ -693,7 +701,12 @@
                     </div>
                     
                     <!-- Honeypot field - KHONG XOA, de chong spam bot -->
-                    <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+                    <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
+                    
+                    <!-- TEST BUTTON - XOA TRUOC KHI DEPLOY -->
+                    <button type="button" onclick="testHoneypot()" style="background: #ff6b6b; margin-bottom: 10px; width: 100%; padding: 10px; border: none; border-radius: 5px; color: white; font-weight: 600; cursor: pointer;">
+                        🧪 TEST: Giả làm spam bot
+                    </button>
                     
                     <button type="submit" class="submit-btn">Gửi yêu cầu tư vấn</button>
                 </form>
@@ -984,13 +997,21 @@
         
         // Form submission handler with AJAX and spam protection
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Prevent default form submission
             
-            // Honeypot spam check
-            const honeypot = this.querySelector('input[name="website"]');
+            // TEMPORARY: Comment dong duoi de submit truc tiep lan dau (verify form)
+            // Sau khi form da verified, bo comment dong nay de dung AJAX
+            e.preventDefault();
+            
+            // Honeypot spam check (Formspree native honeypot)
+            const honeypot = this.querySelector('input[name="_gotcha"]');
             if (honeypot && honeypot.value !== '') {
                 // Bot detected! Silently ignore
-                console.log('Spam detected');
+                console.log('🛡️ SPAM DETECTED! Honeypot field was filled.');
+                console.log('Form will NOT be submitted. Bot blocked successfully! ✅');
+                alert('🛡️ SPAM BOT DETECTED!\n\nHoneypot field đã bị điền → Form KHÔNG gửi đi.\n\n✅ Spam protection hoạt động tốt!');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
                 return false;
             }
             
@@ -1002,13 +1023,10 @@
             submitBtn.disabled = true;
             
             try {
-                // Get form data
+                // Get form data - keep _gotcha for Formspree to handle
                 const formData = new FormData(this);
                 
-                // Remove honeypot field before sending
-                formData.delete('website');
-                
-                // Submit to Formspree using AJAX
+                // Submit to Formspree
                 const response = await fetch(this.action, {
                     method: 'POST',
                     body: formData,
@@ -1017,15 +1035,25 @@
                     }
                 });
                 
+                const data = await response.json();
+                
                 if (response.ok) {
                     // Show success modal
                     document.getElementById('success-modal').classList.add('show');
-                    this.reset(); // Clear form
+                    this.reset();
                 } else {
-                    alert('Có lỗi xảy ra. Vui lòng thử lại!');
+                    // Show error details
+                    console.error('Form error:', data);
+                    if (data.errors) {
+                        const errorMsg = data.errors.map(e => e.message).join('\n');
+                        alert('Lỗi: ' + errorMsg);
+                    } else {
+                        alert('Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin và thử lại!');
+                    }
                 }
             } catch (error) {
-                alert('Có lỗi xảy ra. Vui lòng thử lại!');
+                console.error('Submit error:', error);
+                alert('Không thể kết nối đến server. Vui lòng kiểm tra kết nối internet và thử lại!');
             } finally {
                 // Reset button
                 submitBtn.textContent = originalText;
@@ -1044,6 +1072,24 @@
                 closeModal();
             }
         });
+        
+        // TEST FUNCTION - Test honeypot spam protection
+        function testHoneypot() {
+            const honeypot = document.querySelector('input[name="_gotcha"]');
+            if (honeypot) {
+                // Fill honeypot like a bot would
+                honeypot.value = "I am a spam bot";
+                alert('✅ Đã điền vào honeypot field!\n\n📝 Bây giờ điền form và nhấn "Gửi yêu cầu tư vấn"\n\n🛡️ Form sẽ KHÔNG gửi đi nếu honeypot hoạt động đúng');
+                
+                // Highlight honeypot temporarily for demo
+                honeypot.style.cssText = 'position: static !important; opacity: 1 !important; border: 3px solid red !important; background: #ffe0e0 !important; width: 100% !important; height: 40px !important;';
+                honeypot.placeholder = '← Bot đã điền vào field này!';
+                
+                setTimeout(() => {
+                    honeypot.style.cssText = 'position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0;';
+                }, 5000);
+            }
+        }
         
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
