@@ -559,25 +559,38 @@
                 <h3>Đăng ký tư vấn miễn phí</h3>
                 <p>Nhận tư vấn từ chuyên gia trong vòng 24 giờ</p>
                 
-                <form id="contact-form">
+                <!-- 
+                    HƯỚNG DẪN SETUP FORM:
+                    
+                    OPTION 1 - FORMSPREE (Dễ nhất):
+                    1. Đăng ký tại https://formspree.io
+                    2. Tạo form mới, copy Form ID
+                    3. Thay YOUR_FORM_ID bên dưới bằng ID của bạn
+                    4. Dữ liệu sẽ gửi về email bạn đăng ký
+                    
+                    OPTION 2 - GOOGLE SHEETS:
+                    Xem hướng dẫn phía dưới trong script
+                -->
+                
+                <form id="contact-form" action="https://formspree.io/f/mwpravko" method="POST">
                     <div class="form-group">
                         <label>Họ và tên *</label>
-                        <input type="text" required placeholder="Nguyễn Văn A">
+                        <input type="text" name="name" required placeholder="Nguyễn Văn A">
                     </div>
                     
                     <div class="form-group">
                         <label>Số điện thoại *</label>
-                        <input type="tel" required placeholder="0912 345 678">
+                        <input type="tel" name="phone" required placeholder="0912 345 678">
                     </div>
                     
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" placeholder="email@example.com">
+                        <input type="email" name="email" placeholder="email@example.com">
                     </div>
                     
                     <div class="form-group">
                         <label>Dịch vụ quan tâm *</label>
-                        <select required>
+                        <select name="service" required>
                             <option value="">Chọn dịch vụ</option>
                             <option>Tư vấn thành lập doanh nghiệp</option>
                             <option>Tư vấn hợp đồng</option>
@@ -590,7 +603,7 @@
                     
                     <div class="form-group">
                         <label>Nội dung tư vấn</label>
-                        <textarea placeholder="Mô tả ngắn gọn vấn đề của bạn..."></textarea>
+                        <textarea name="message" placeholder="Mô tả ngắn gọn vấn đề của bạn..."></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">Gửi yêu cầu tư vấn</button>
@@ -833,11 +846,56 @@
             ).join('');
         }
         
-        // Form submission
+        // ============================================
+        // HUONG DAN SETUP LUU TRU FORM DATA
+        // ============================================
+        
+        /* 
+        OPTION 1 - FORMSPREE (DE XUAT):
+        --------------------------------
+        1. Dang ky mien phi: https://formspree.io
+        2. Tao form moi, Copy Form ID (dang: xoqrgpqv)
+        3. Trong HTML o tren, thay YOUR_FORM_ID bang ID cua ban
+        4. Deploy website, form tu dong gui ve email
+        
+        Uu diem: De nhat, co dashboard, spam protection
+        Gia: Mien phi 50 submissions/thang
+        
+        
+        OPTION 2 - GOOGLE SHEETS:
+        --------------------------------
+        1. Tao Google Sheet moi
+        2. Tools > Script Editor
+        3. Copy code nay vao Apps Script
+        4. Deploy as Web app
+        5. Copy URL va thay vao form action
+        
+        Uu diem: Mien phi khong gioi han
+        Nhuoc diem: Setup phuc tap hon
+        
+        
+        OPTION 3 - EMAILJS:
+        --------------------------------
+        1. Dang ky: https://emailjs.com
+        2. Tao email service va template
+        3. Them JavaScript vao website
+        4. Sua form submission code
+        
+        Uu diem: Custom email template dep
+        Gia: Mien phi 200 emails/thang
+        */
+        
+        // Form submission handler
         document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ trong vòng 24 giờ.');
-            this.reset();
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Dang gui...';
+            submitBtn.disabled = true;
+            
+            // Form se tu dong gui den Formspree
+            // Sau khi gui, Formspree se chuyen huong den trang cam on cua ho
         });
         
         // Smooth scroll
